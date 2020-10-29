@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
+    ports:
+      - '3306:3306'
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    tty: true
+    container_name: hesokulist_db
+ 
+  web:
+    build: ./api
+    # command: /bin/sh -c "rm -f tmp/pids/server.pid"
+    volumes:
+      - ./api/:/usr/src/api/
+    ports:
+      - "$API_PORT:$CONTAINER_PORT"
+    depends_on:
+      - db
+    tty: true
+    container_name: hesokulist_web
+
+  front:
+    build:
+      context: ./front
+      args:
+        CONTAINER_PORT: $CONTAINER_PORT
+        HOME_DIR: $HOME_DIR/front
+    command: yarn run dev
+    volumes:
+      # - ./front:/$WORKDIR
+      - ./front/:/usr/src/front/
+    ports:
+      - "$FRONT_PORT:$CONTAINER_PORT"
+    depends_on:
+      - web
+    container_name: hesokulist_front
+
