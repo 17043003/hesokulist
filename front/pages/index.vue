@@ -1,13 +1,9 @@
 <template>
     <div id="app">
         <h1 class="title">へそくりすと</h1>
-        <input type="text" v-model="newItem">
-        <form v-on:submit.prevent>
-            <button @click="addItem">add</button>
-        </form>
-
-        <li v-for="(item, index) in items" :key="index">
-            {{ index +1 }}:{{ item.item }}
+        
+        <li v-for="(data, index) in datas" :key="index">
+            {{ data.id }}:{{ data.amount }}
         </li>
 
         <h2 class="subtitle">hesokulist</h2>
@@ -21,17 +17,14 @@ export default {
     },
     data() {
         return {
-            items: [],
-            newItem: ''
+            datas: []
         }
     },
+    async asyncData({ app }) {
+        let res = await app.$axios.$get('http://localhost:4444/api/v1/households')
+        return { datas: res.datas }
+    },
     methods: {
-        addItem: function(event) {
-            let todo = {
-                item: this.newItem
-            };
-            this.items.push(todo)
-        }
     }
 }
 </script>

@@ -1,5 +1,6 @@
 class Api::V1::HouseholdsController < ApplicationController
     def index
-        render json: { status: "ok", id: 1 }
+        datas = Household.all
+        render json: { status: "ok", datas: datas }
     end
 end
