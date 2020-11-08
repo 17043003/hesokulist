@@ -3,7 +3,7 @@
         <h1 class="title">へそくりすと</h1>
         
         <li v-for="(data, index) in datas" :key="index">
-            {{ data.id }}:{{ data.amount }}
+            日付：{{ data.spent_date }}：{{ data.amount }}
         </li>
 
         <h2 class="subtitle">hesokulist</h2>
