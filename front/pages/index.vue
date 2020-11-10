@@ -2,9 +2,20 @@
     <div id="app">
         <h1 class="title">へそくりすと</h1>
         
-        <li v-for="(data, index) in datas" :key="index">
-            日付：{{ data.spent_date }}：{{ data.amount }}
-        </li>
+        <table>
+            <tbody class='list-data'>
+                <tr>
+                    <th>日付</th>
+                    <th>金額</th>
+                </tr>
+                <tr v-for="(data, index) in datas" :key="index">
+                    <td>{{ data.spent_date }}</td>
+                    <td>{{ data.amount }}</td>
+                    <td><nuxt-link to="/household/1">詳細</nuxt-link></td>
+                </tr>
+                
+            </tbody>
+        </table>
 
         <h2 class="subtitle">hesokulist</h2>
     </div>
@@ -28,3 +39,10 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+    .list-data{
+        background-color: rgb(18, 36, 30);
+        border: solid 1px;
+    }
+</style>
