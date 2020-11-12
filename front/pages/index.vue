@@ -11,9 +11,8 @@
                 <tr v-for="(data, index) in datas" :key="index">
                     <td>{{ data.spent_date }}</td>
                     <td>{{ data.amount }}</td>
-                    <td><nuxt-link to="/household/1">詳細</nuxt-link></td>
+                    <td><nuxt-link :to="`/household/${data.id}`">詳細</nuxt-link></td>
                 </tr>
-                
             </tbody>
         </table>
 
@@ -32,7 +31,7 @@ export default {
         }
     },
     async asyncData({ app }) {
-        let res = await app.$axios.$get('http://localhost:4444/api/v1/households')
+        let res = await app.$axios.$get(`http://localhost:4444/api/v1/households`)
         return { datas: res.datas }
     },
     methods: {
