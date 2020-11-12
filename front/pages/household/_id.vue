@@ -1,5 +1,9 @@
 <template>
-    <div>{{ $route.params.id }}</div>
+    <div>
+        {{ $route.params.id }}
+        {{ data.amount }}
+        {{ data.memo }}
+    </div>
 </template>
 
 <script>
@@ -12,9 +16,9 @@ export default {
             data: []
         }
     },
-    async asyncData({ app }) {
-        let res = await app.$axios.$get(`http://localhost:4444/api/v1/households`)
-        return { data: res.datas }
+    async asyncData({ app, params }) {
+        let res = await app.$axios.$get(`http://localhost:4444/api/v1/households/${params.id}`)
+        return { data: res.data }
     },
     methods: {
     }
