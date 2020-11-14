@@ -28,4 +28,6 @@ COPY . $APP_ROOT
 
 EXPOSE 3000
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
+CMD ["/entrypoint.sh"]

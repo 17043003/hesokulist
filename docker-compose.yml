@@ -16,7 +16,6 @@ services:
  
   web:
     build: ./api
-    # command: /bin/sh -c "rm -f tmp/pids/server.pid"
     volumes:
       - ./api/:/usr/src/api/
     ports:
