@@ -7,7 +7,9 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --ext .js,.ts,.vue .",
+    "lintfix": "eslint --fix --ext .js,.ts,.vue ."
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.2",
@@ -15,10 +17,14 @@
     "nuxt": "^2.14.6"
   },
   "devDependencies": {
+    "@nuxtjs/eslint-config": "^5.0.0",
     "@nuxtjs/vuetify": "^1.11.2",
     "@vue/test-utils": "^1.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^26.5.0",
+    "eslint": "^7.13.0",
+    "eslint-plugin-nuxt": "^2.0.0",
+    "eslint-webpack-plugin": "^2.3.0",
     "jest": "^26.5.0",
     "vue-jest": "^3.0.4"
   }

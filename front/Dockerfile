@@ -18,4 +18,6 @@ ENV HOME=/${HOME_DIR} \
 
 WORKDIR ${HOME}
 
+# RUN npm install eslint-webpack-plugin --save-dev
+
 EXPOSE ${CONTAINER_PORT}
