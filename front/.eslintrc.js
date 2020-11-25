@@ -6,14 +6,14 @@ module.exports = {
   },
   extends: [
     'plugin:nuxt/recommended',
-    "@nuxtjs"
+    '@nuxtjs'
   ],
   plugins: [
   ],
   rules: {
-    "no-extra-semi": "warn",
-    "semi": [2, "never"],
-    "no-console": "off",
-    "vue/max-attributes-per-line": "off",
+    'no-extra-semi': 'warn',
+    semi: [2, 'never'],
+    'no-console': 'off',
+    'vue/max-attributes-per-line': 'off'
   }
 }
