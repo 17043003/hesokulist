@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <h1 class="title">
-      へそくりすと
-    </h1>
+    <h1 class="title">へそくりすと</h1>
 
     <table>
       <tbody class="list-data">
@@ -14,42 +12,35 @@
           <td>{{ data.spent_date }}</td>
           <td>{{ data.amount }}</td>
           <td>
-            <nuxt-link :to="`/household/${data.id}`">
-              詳細
-            </nuxt-link>
+            <nuxt-link :to="`/household/${data.id}`"> 詳細 </nuxt-link>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <h2 class="subtitle">
-      hesokulist
-    </h2>
+    <h2 class="subtitle">hesokulist</h2>
   </div>
 </template>
 
 <script>
 export default {
-  components: {
-
-  },
-  async asyncData ({ app }) {
-    const res = await app.$axios.$get('http://localhost:4444/api/v1/households')
+  components: {},
+  async asyncData({ app }) {
+    const res = await app.$axios.$get("http://localhost:4444/api/v1/households")
     return { datas: res.datas }
   },
-  data () {
+  data() {
     return {
-      datas: []
+      datas: [],
     }
   },
-  methods: {
-  }
+  methods: {},
 }
 </script>
 
 <style lang="scss">
-    .list-data{
-        background-color: rgb(18, 36, 30);
-        border: solid 1px;
-    }
+.list-data {
+  background-color: rgb(18, 36, 30);
+  border: solid 1px;
+}
 </style>

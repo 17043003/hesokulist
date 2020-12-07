@@ -2,25 +2,26 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
+    jest: true,
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: "babel-eslint",
   },
   extends: [
-    'eslint:recommended',
-    'plugin:vue/recommended',
-    'plugin:prettier/recommended',
+    "eslint:recommended",
+    "plugin:vue/recommended",
+    "plugin:prettier/recommended",
   ],
-  plugins: [
-    'vue'
-  ],
+  plugins: ["vue"],
   rules: {
-    'no-extra-semi': 'warn',
-    semi: [2, 'never'],
-    'no-console': 'off',
-    'vue/max-attributes-per-line': 'off',
+    "no-extra-semi": "warn",
+    semi: [2, "never"],
+    "no-console": "off",
+    "vue/max-attributes-per-line": "off",
     "prettier/prettier": ["error", { semi: false }],
     "vue/html-self-closing": "off", //空タグを許可する
-  }
+    "vue/singleline-html-element-content-newline": "off",
+    "vue/multiline-html-element-content-newline": "off",
+  },
 }

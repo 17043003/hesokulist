@@ -8,19 +8,18 @@
 
 <script>
 export default {
-  components: {
-
-  },
-  async asyncData ({ app, params }) {
-    const res = await app.$axios.$get(`http://localhost:4444/api/v1/households/${params.id}`)
+  components: {},
+  async asyncData({ app, params }) {
+    const res = await app.$axios.$get(
+      `http://localhost:4444/api/v1/households/${params.id}`
+    )
     return { data: res.data }
   },
-  data () {
+  data() {
     return {
-      data: []
+      data: [],
     }
   },
-  methods: {
-  }
+  methods: {},
 }
 </script>
