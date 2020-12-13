@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1 class="title">へそくりすと</h1>
-
+    <v-calendar></v-calendar>
     <table>
       <tbody class="list-data">
         <tr>
