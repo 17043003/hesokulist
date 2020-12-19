@@ -12,10 +12,12 @@
     "lintfix": "eslint --fix --ext .js,.ts,.vue ."
   },
   "dependencies": {
+    "@fullcalendar/core": "^5.4.0",
+    "@fullcalendar/daygrid": "^5.4.0",
+    "@fullcalendar/interaction": "^5.4.0",
     "@nuxtjs/axios": "^5.12.2",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.6",
-    "v-calendar": "^3.0.0-alpha.2"
+    "nuxt": "^2.14.6"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^5.0.0",
