@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1 class="title">へそくりすと</h1>
-    <v-calendar is-expanded></v-calendar>
+    <Calendar></Calendar>
     <table>
       <tbody class="list-data">
         <tr>
@@ -23,8 +23,11 @@
 </template>
 
 <script>
+import Calendar from '~/components/Calendar.vue'
 export default {
-  components: {},
+  components: {
+    Calendar
+  },
   async asyncData({ app }) {
     const res = await app.$axios.$get("http://localhost:4444/api/v1/households")
     return { datas: res.datas }
