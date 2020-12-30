@@ -2,6 +2,17 @@
   <div id="app">
     <h1 class="title">へそくりすと</h1>
     <Calendar></Calendar>
+
+    <!-- 詳細やグラフの表示を追加 -->
+    <TabItem
+    v-for="item in list"
+    v-bind="item" :key="item.id"
+    v-model="currentId" />
+
+    <div class="content">
+      {{ current.content }}
+    </div>
+
     <table>
       <tbody class="list-data">
         <tr>
@@ -35,9 +46,21 @@ export default {
   data() {
     return {
       datas: [],
+
+      currentId: 1,
+      list: [
+        { id: 1, label: '詳細', content: 'detail' },
+        { id: 2, label: 'グラフ', content: 'graph' }
+      ]
     }
   },
   methods: {},
+
+  computed: {
+    current() {
+      return this.list.find(el => el.id === this.currentId) || {}
+    }
+  }
 }
 </script>
 
