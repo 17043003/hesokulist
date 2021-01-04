@@ -1,23 +1,27 @@
 <template>
     <div>
         <client-only>
-            <v-calendar is-expanded :attributes='attrs'>
-                <!-- ページごとのヘッダータイトルを設定 -->
+            <v-date-picker is-expanded
+            :attributes='attrs'
+            v-model='selectedDay'
+            @dayclick='dayClicked'>
                 <template slot='header-title' slot-scope='page'>
                     {{page.yearLabel}}年 {{page.month}}月
                 </template>
-                <!-- 日毎の内容を設定 -->
-                <!-- <template slot='day-content' slot-scope='props'>
-                    {{props.day.day}}
-                </template> -->
-            </v-calendar>
+            </v-date-picker>
         </client-only>
     </div>
 </template>
 
 <script>
 export default {
-    methods: {},
+    methods: {
+        dayClicked(day){
+            console.log(day)
+            this.selectedDay = day;
+            this.$emit('selectedDay', this.selectedDay.id); // 選択された日付を渡す
+        }
+    },
     data() {
         return {
             attrs: [
@@ -26,7 +30,8 @@ export default {
                     dot: true,
                     dates: new Date(),
                 }
-            ]
+            ],
+            selectedDay: null,
         }
     }
 }
