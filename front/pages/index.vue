@@ -11,16 +11,18 @@
 
     <div class="content">
       <h1>{{ current.content }}</h1>
-      <div class="detail">
+      <div class="detail" v-if="current.id == 1">
         <table>
           <tbody>
             <tr>
               <th>日付</th>
               <th>金額</th>
+              <th>メモ</th>
             </tr>
             <tr v-if="detailData">
               <td>{{ detailData.spent_date }}</td>
               <td>{{ detailData.amount }}</td>
+              <td>{{ detailData.memo }}</td>
             </tr>
             <tr v-else>
               <td>{{ currentDate }}

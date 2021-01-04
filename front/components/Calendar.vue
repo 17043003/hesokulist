@@ -17,7 +17,6 @@
 export default {
     methods: {
         dayClicked(day){
-            console.log(day)
             this.selectedDay = day;
             this.$emit('selectedDay', this.selectedDay.id); // 選択された日付を渡す
         }
