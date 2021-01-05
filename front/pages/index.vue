@@ -12,37 +12,21 @@
     <div class="content">
       <h1>{{ current.content }}</h1>
       <div class="detail" v-if="current.id == 1">
-        <table class="household-list">
-          <tbody>
-            <tr>
-              <th>日付</th>
-              <th>金額</th>
-              <th>メモ</th>
-            </tr>
-            <tr v-if="detailData">
-              <td>{{ detailData.spent_date }}</td>
-              <td>{{ detailData.amount }}</td>
-              <td>{{ detailData.memo }}</td>
-            </tr>
-            <tr v-else>
-              <td>{{ currentDate }}</td>
-              <td>0</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+        <Detail :detailData="detailData" :currentDate="currentDate"/>
       </div>
     </div>
 
-    <h2 class="subtitle">hesokulist</h2>
   </div>
 </template>
 
 <script>
 import Calendar from '~/components/Calendar.vue'
+import Detail   from '~/components/Detail.vue'
+
 export default {
   components: {
-    Calendar
+    Calendar,
+    Detail
   },
   async asyncData({ app }) {
     const res = await app.$axios.$get("http://localhost:4444/api/v1/households")
@@ -63,9 +47,9 @@ export default {
   },
   mounted: function(){
     const date = new Date();
-    this.currentDate = date.getFullYear() + '-'
-    + (date.getMonth() + 1) + '-'
-    + date.getDate()
+    this.currentDate = ('0000' + date.getFullYear()).slice(-4) + '-'
+    + ('00' + (date.getMonth() + 1)).slice(-2) + '-'
+    + ('00' + date.getDate()).slice(-2)
   },
   methods: {
     getDetail(day) {
