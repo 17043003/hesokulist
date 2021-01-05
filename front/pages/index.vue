@@ -1,32 +1,33 @@
 <template>
   <div id="app">
     <h1 class="title">へそくりすと</h1>
-    <Calendar @selectedDay="getDetail"></Calendar>
+    <Calendar @selected-day="getDetail"></Calendar>
 
     <!-- 詳細やグラフの表示を追加 -->
     <TabItem
-    v-for="item in list"
-    v-bind="item" :key="item.id"
-    v-model="currentId" />
+      v-for="item in list"
+      :key="item.id"
+      v-model="currentId"
+      v-bind="item"
+    />
 
     <div class="content">
       <h1>{{ current.content }}</h1>
-      <div class="detail" v-if="current.id == 1">
-        <Detail :detailData="detailData" :currentDate="currentDate"/>
+      <div v-if="current.id == 1" class="detail">
+        <Detail :detail-data="detailData" :current-date="currentDate" />
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import Calendar from '~/components/Calendar.vue'
-import Detail   from '~/components/Detail.vue'
+import Calendar from "~/components/Calendar.vue"
+import Detail from "~/components/Detail.vue"
 
 export default {
   components: {
     Calendar,
-    Detail
+    Detail,
   },
   async asyncData({ app }) {
     const res = await app.$axios.$get("http://localhost:4444/api/v1/households")
@@ -39,60 +40,64 @@ export default {
 
       currentId: 1,
       list: [
-        { id: 1, label: '詳細', content: 'detail' },
-        { id: 2, label: 'グラフ', content: 'graph' }
+        { id: 1, label: "詳細", content: "detail" },
+        { id: 2, label: "グラフ", content: "graph" },
       ],
-      currentDate: null
-    }
-  },
-  mounted: function(){
-    const date = new Date();
-    this.currentDate = ('0000' + date.getFullYear()).slice(-4) + '-'
-    + ('00' + (date.getMonth() + 1)).slice(-2) + '-'
-    + ('00' + date.getDate()).slice(-2)
-  },
-  methods: {
-    getDetail(day) {
-      this.currentDate = day;
-
-      const res = this.$axios.$get(
-        `http://localhost:4444/api/v1/household`, {
-          params: {
-            date: this.currentDate
-          }
-        }
-      ).then(responseData => {
-        this.detailData = responseData.data;
-      });
+      currentDate: null,
     }
   },
 
   computed: {
     current() {
-      return this.list.find(el => el.id === this.currentId) || {}
-    }
-  }
+      return this.list.find((el) => el.id === this.currentId) || {}
+    },
+  },
+  mounted: function () {
+    const date = new Date()
+    this.currentDate =
+      ("0000" + date.getFullYear()).slice(-4) +
+      "-" +
+      ("00" + (date.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("00" + date.getDate()).slice(-2)
+  },
+  methods: {
+    getDetail(day) {
+      this.currentDate = day
+
+      this.$axios
+        .$get(`http://localhost:4444/api/v1/household`, {
+          params: {
+            date: this.currentDate,
+          },
+        })
+        .then((responseData) => {
+          this.detailData = responseData.data
+        })
+    },
+  },
 }
 </script>
 
 <style lang="scss">
 $table-border-color: lightyellow;
 
-.household-list{
+.household-list {
   border-collapse: collapse;
   border: solid 1px $table-border-color;
 }
-th, td{
+th,
+td {
   padding: 4px;
   width: 200px;
   border: solid 1px $table-border-color;
 }
-th{
+th {
   color: #226600;
   background-color: lightgray;
   text-align: center;
 }
-td{
+td {
   color: black;
   background-color: lightsteelblue;
   text-align: right;
