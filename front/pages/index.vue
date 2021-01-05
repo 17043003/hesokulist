@@ -12,7 +12,7 @@
     <div class="content">
       <h1>{{ current.content }}</h1>
       <div class="detail" v-if="current.id == 1">
-        <table>
+        <table class="household-list">
           <tbody>
             <tr>
               <th>日付</th>
@@ -25,9 +25,9 @@
               <td>{{ detailData.memo }}</td>
             </tr>
             <tr v-else>
-              <td>{{ currentDate }}
-              </td>
+              <td>{{ currentDate }}</td>
               <td>0</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
@@ -92,8 +92,25 @@ export default {
 </script>
 
 <style lang="scss">
-.list-data {
-  background-color: rgb(18, 36, 30);
-  border: solid 1px;
+$table-border-color: lightyellow;
+
+.household-list{
+  border-collapse: collapse;
+  border: solid 1px $table-border-color;
+}
+th, td{
+  padding: 4px;
+  width: 200px;
+  border: solid 1px $table-border-color;
+}
+th{
+  color: #226600;
+  background-color: lightgray;
+  text-align: center;
+}
+td{
+  color: black;
+  background-color: lightsteelblue;
+  text-align: right;
 }
 </style>
