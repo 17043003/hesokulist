@@ -18,9 +18,8 @@ class Api::V1::HouseholdsController < ApplicationController
     def create
         data = Household.find_or_initialize_by(params[:spent_date])
         
-        # if data.save
         if data.update(household_params)
-            render json: { status: "ok", message: "データを更新しました", data: data }
+            render json: { status: "ok", message: "データを更新しました" }
         else
             render json: { status: "ng", message: "データの更新に失敗" }
         end
