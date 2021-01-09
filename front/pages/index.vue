@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1 class="title">へそくりすと</h1>
-    <Calendar @selected-day="getDetail"></Calendar>
+    <Calendar @selected-day="setCurrentDate"></Calendar>
 
     <!-- 詳細やグラフの表示を追加 -->
     <TabItem
@@ -14,7 +14,7 @@
     <div class="content">
       <h1>{{ current.content }}</h1>
       <div v-if="current.id == 1" class="detail">
-        <Detail :detail-data="detailData" :current-date="currentDate" />
+        <Detail :current-date="currentDate" />
       </div>
     </div>
   </div>
@@ -62,18 +62,8 @@ export default {
       ("00" + date.getDate()).slice(-2)
   },
   methods: {
-    getDetail(day) {
-      this.currentDate = day
-
-      this.$axios
-        .$get(`http://localhost:4444/api/v1/household`, {
-          params: {
-            date: this.currentDate,
-          },
-        })
-        .then((responseData) => {
-          this.detailData = responseData.data
-        })
+    setCurrentDate(date) {
+      this.currentDate = date
     },
   },
 }
