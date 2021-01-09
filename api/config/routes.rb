@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get "/households/" => "households#index"
       get "/household/" => "households#show"
+      post "/household/" => "households#create"
     end
   end
 end
