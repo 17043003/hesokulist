@@ -1,28 +1,43 @@
 <template>
-  <table class="household-list">
-    <tbody>
-      <li v-for="message in messages" :key="message.key">
-        {{
-          message
-        }}
-      </li>
-      <tr>
-        <th>日付</th>
-        <th>金額</th>
-        <th>メモ</th>
-      </tr>
-      <tr>
-        <td>{{ currentDate }}</td>
-        <td>
-          <input v-model="amount" type="number" name="amount" />
-        </td>
-        <td>
-          <input v-model="memo" type="text" name="memo" />
-        </td>
-        <input type="button" value="更新" @click="updateData" />
-      </tr>
-      </li></tbody>
-  </table>
+  <div>
+    <li v-for="message in messages" :key="message.key">
+      {{ message }}
+    </li>
+    <table class="household-list">
+      <tbody>
+        <tr>
+          <th>日付</th>
+          <th>金額</th>
+          <th>メモ</th>
+        </tr>
+        <tr>
+          <td>{{ currentDate }}</td>
+          <td>
+            <input v-model="amount" type="number" name="amount" />
+          </td>
+          <td>
+            <input v-model="memo" type="text" name="memo" />
+          </td>
+          <td>
+            <input
+              type="button"
+              value="更新"
+              class="update-button"
+              @click="updateData"
+            />
+          </td>
+          <td>
+            <input
+              type="button"
+              value="削除"
+              class="delete-button"
+              @click="deleteData"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -83,13 +98,46 @@ export default {
           memo: this.memo,
         })
         .then((res) => {
-            this.messages.length = 0 // 配列内要素を全て削除
+          this.messages.length = 0 // 配列内要素を全て削除
           res.data.messages.forEach((message) => {
             this.messages.push(message)
           })
-          //   this.messages = res.data.messages
+        })
+    },
+    deleteData() {
+      this.$axios
+        .request({
+          method: "delete",
+          url: "http://localhost:4444/api/v1/household",
+          data: { spent_date: this.currentDate },
+        })
+        .then((res) => {
+          if (res.data.status === "ok") {
+            // 削除に成功した場合のみ、フォームをクリア
+            this.amount = 0
+            this.memo = ""
+
+            this.messages.length = 0 // 配列内要素を全て削除
+            res.data.messages.forEach((message) => {
+              this.messages.push(message)
+            })
+          }
         })
     },
   },
 }
 </script>
+
+<style lang="scss">
+.update-button {
+  background-color: midnightblue;
+  width: 100%;
+  height: 100%;
+}
+
+.delete-button {
+  background-color: rgb(25, 112, 51);
+  width: 100%;
+  height: 100%;
+}
+</style>

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get "/households/" => "households#index"
       get "/household/" => "households#show"
       post "/household/" => "households#create"
+      delete "/household/" => "households#destroy"
     end
   end
 end
