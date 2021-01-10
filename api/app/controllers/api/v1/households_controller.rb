@@ -19,9 +19,11 @@ class Api::V1::HouseholdsController < ApplicationController
         data = Household.find_or_initialize_by(params[:spent_date])
         
         if data.update(household_params)
-            render json: { status: "ok", message: "データを更新しました" }
+            render json: { status: "ok", messages: ["データを更新しました"] }
         else
-            render json: { status: "ng", message: "データの更新に失敗" }
+            if data.errors.any?
+                render json: { status: "ng", messages: data.errors.full_messages }
+            end
         end
     end
 

@@ -1,6 +1,11 @@
 <template>
   <table class="household-list">
     <tbody>
+      <li v-for="message in messages" :key="message.key">
+        {{
+          message
+        }}
+      </li>
       <tr>
         <th>日付</th>
         <th>金額</th>
@@ -16,7 +21,7 @@
         </td>
         <input type="button" value="更新" @click="updateData" />
       </tr>
-    </tbody>
+      </li></tbody>
   </table>
 </template>
 
@@ -27,7 +32,7 @@ export default {
   },
   data: function () {
     return {
-      message: "",
+      messages: [],
       amount: 0,
       memo: "",
       detailData: {},
@@ -41,6 +46,7 @@ export default {
       // 日付選択時に変数を初期化
       this.amount = 0
       this.memo = ""
+      this.messages = []
     },
     detailData: function (val) {
       if (val !== null) {
@@ -77,7 +83,11 @@ export default {
           memo: this.memo,
         })
         .then((res) => {
-          alert(res.data.message)
+            this.messages.length = 0 // 配列内要素を全て削除
+          res.data.messages.forEach((message) => {
+            this.messages.push(message)
+          })
+          //   this.messages = res.data.messages
         })
     },
   },
