@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       get "/household/" => "households#show"
       post "/household/" => "households#create"
       delete "/household/" => "households#destroy"
+
+      post "/users/" => "users#signup"
     end
   end
 end
