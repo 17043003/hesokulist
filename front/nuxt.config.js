@@ -23,9 +23,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [
-    { src: '~plugins/v-calendar.js', ssr: false }
-  ],
+  plugins: [{ src: "~plugins/v-calendar.js", ssr: false }],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,

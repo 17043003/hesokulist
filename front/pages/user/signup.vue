@@ -1,14 +1,22 @@
 <template>
   <div class="form-wrapper">
     <label class="form-group">
-      <span class="label">名前：</span>
-      <input v-model="name" type="text" class="form name-form" />
+      <input
+        v-model="name"
+        type="text"
+        placeholder="Your name"
+        class="form name-form"
+      />
     </label>
     <label class="form-group">
-      <span class="label">メールアドレス：</span>
-      <input v-model="email" type="email" class="form email-form" />
+      <input
+        v-model="email"
+        type="email"
+        placeholder="Email address"
+        class="form email-form"
+      />
     </label>
-    <button @click="register_user">新規登録</button>
+    <button class="signup-button" @click="register_user">新規登録</button>
   </div>
 </template>
 
@@ -37,18 +45,49 @@ export default {
   flex-direction: column;
   align-items: center;
   margin-top: 5%;
+  background-color: rgb(91, 114, 101);
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 0;
+  border-radius: 30px;
 }
 .form {
-  border: 1px solid aquamarine;
   width: 50%;
+  height: 40px;
   margin-bottom: 3%;
+  color: white;
+  border: 3px solid rgb(89, 141, 209);
 }
 label.form-group {
-  width: 50%;
+  width: 90%;
+  text-align: center;
 }
-span.label {
-  width: 30%;
-  display: inline-block;
-  text-align: right;
+
+button.signup-button {
+  background-color: rgb(47, 150, 209);
+  padding: 10px;
+  border-radius: 30px;
+  box-shadow: 4px 4px 2px rgb(20, 91, 150);
+}
+
+@mixin placeholder($color) {
+  &::placeholder {
+    color: $color;
+  }
+
+  // IE
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+
+  // Edge
+  &::-ms-input-placeholder {
+    color: $color;
+  }
+}
+
+input {
+  @include placeholder(rgb(131, 125, 125));
 }
 </style>
