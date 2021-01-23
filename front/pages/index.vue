@@ -30,7 +30,7 @@ export default {
     Detail,
   },
   async asyncData({ app }) {
-    const res = await app.$axios.$get("http://localhost:4444/api/v1/households")
+    const res = await app.$axios.$get("households")
     return { datas: res.datas }
   },
   data() {

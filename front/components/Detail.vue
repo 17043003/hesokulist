@@ -81,7 +81,7 @@ export default {
   methods: {
     getDetailDatas(date) {
       this.$axios
-        .$get(`http://localhost:4444/api/v1/household`, {
+        .$get(`household`, {
           params: {
             date: date,
           },
@@ -92,7 +92,7 @@ export default {
     },
     updateData() {
       this.$axios
-        .post("http://localhost:4444/api/v1/household", {
+        .post("household", {
           spent_date: this.currentDate,
           amount: this.amount,
           memo: this.memo,
@@ -108,7 +108,7 @@ export default {
       this.$axios
         .request({
           method: "delete",
-          url: "http://localhost:4444/api/v1/household",
+          url: "household",
           data: { spent_date: this.currentDate },
         })
         .then((res) => {
