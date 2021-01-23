@@ -64,4 +64,26 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
+
+  auth: {
+    redirect: {
+      login: "/login",
+      logout: "/login",
+      callback: false,
+      home: "/users/mypage",
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "/api/v1/auth/login",
+            method: "post",
+            propertyName: "token",
+          },
+          logout: { url: "/api/v1/auth/logout", method: "post" },
+          user: false,
+        },
+      },
+    },
+  },
 }
